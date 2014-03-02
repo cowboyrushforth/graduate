@@ -1,0 +1,1 @@
+msp430-gcc  -mmcu=msp430f2112 -g -O0 -Wall    CMakeFiles/test2.dir/main.c.o  -o test2 -rdynamic 

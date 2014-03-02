@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/tofu/Documents/graduate_design/qtcreator/rx/main.c
+msp430.h
+/home/tofu/Documents/graduate_design/qtcreator/rx/msp430.h
+
