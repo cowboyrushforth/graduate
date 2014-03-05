@@ -6,7 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/tofu/Documents/graduate_design/qtcreator/rx/main.c
+/media/tofu/file_disk/tofu/graduate_design/detail/rx/main.c
 msp430.h
-/home/tofu/Documents/graduate_design/qtcreator/rx/msp430.h
+/media/tofu/file_disk/tofu/graduate_design/detail/rx/msp430.h
+uart.h
+/media/tofu/file_disk/tofu/graduate_design/detail/rx/uart.h
+
+/media/tofu/file_disk/tofu/graduate_design/detail/rx/uart.h
 

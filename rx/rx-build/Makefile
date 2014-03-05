@@ -39,10 +39,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/tofu/Documents/graduate_design/qtcreator/rx
+CMAKE_SOURCE_DIR = /media/tofu/file_disk/tofu/graduate_design/detail/rx
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/tofu/Documents/graduate_design/qtcreator/rx/rx-build
+CMAKE_BINARY_DIR = /media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -69,9 +69,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tofu/Documents/graduate_design/qtcreator/rx/rx-build/CMakeFiles /home/tofu/Documents/graduate_design/qtcreator/rx/rx-build/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build/CMakeFiles /media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tofu/Documents/graduate_design/qtcreator/rx/rx-build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -135,6 +135,30 @@ main.c.s:
 	$(MAKE) -f CMakeFiles/rx.dir/build.make CMakeFiles/rx.dir/main.c.s
 .PHONY : main.c.s
 
+uart.o: uart.c.o
+.PHONY : uart.o
+
+# target to build an object file
+uart.c.o:
+	$(MAKE) -f CMakeFiles/rx.dir/build.make CMakeFiles/rx.dir/uart.c.o
+.PHONY : uart.c.o
+
+uart.i: uart.c.i
+.PHONY : uart.i
+
+# target to preprocess a source file
+uart.c.i:
+	$(MAKE) -f CMakeFiles/rx.dir/build.make CMakeFiles/rx.dir/uart.c.i
+.PHONY : uart.c.i
+
+uart.s: uart.c.s
+.PHONY : uart.s
+
+# target to generate assembly for a file
+uart.c.s:
+	$(MAKE) -f CMakeFiles/rx.dir/build.make CMakeFiles/rx.dir/uart.c.s
+.PHONY : uart.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -147,6 +171,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... uart.o"
+	@echo "... uart.i"
+	@echo "... uart.s"
 .PHONY : help
 
 

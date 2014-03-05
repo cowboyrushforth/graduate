@@ -47,10 +47,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/tofu/Documents/graduate_design/qtcreator/rx
+CMAKE_SOURCE_DIR = /media/tofu/file_disk/tofu/graduate_design/detail/rx
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/tofu/Documents/graduate_design/qtcreator/rx/rx-build
+CMAKE_BINARY_DIR = /media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build
 
 #=============================================================================
 # Target rules for target CMakeFiles/rx.dir
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/tofu/Documents/graduate_design/qtcreator/rx/rx-build
 CMakeFiles/rx.dir/all:
 	$(MAKE) -f CMakeFiles/rx.dir/build.make CMakeFiles/rx.dir/depend
 	$(MAKE) -f CMakeFiles/rx.dir/build.make CMakeFiles/rx.dir/build
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/tofu/Documents/graduate_design/qtcreator/rx/rx-build/CMakeFiles  1
+	$(CMAKE_COMMAND) -E cmake_progress_report /media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build/CMakeFiles  1 2
 	@echo "Built target rx"
 .PHONY : CMakeFiles/rx.dir/all
 
@@ -69,9 +69,9 @@ all: CMakeFiles/rx.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/rx.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tofu/Documents/graduate_design/qtcreator/rx/rx-build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/rx.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/tofu/Documents/graduate_design/qtcreator/rx/rx-build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build/CMakeFiles 0
 .PHONY : CMakeFiles/rx.dir/rule
 
 # Convenience name for target.

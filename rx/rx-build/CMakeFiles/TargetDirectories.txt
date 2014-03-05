@@ -1,1 +1,1 @@
-/home/tofu/Documents/graduate_design/qtcreator/rx/rx-build/CMakeFiles/rx.dir
+/media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build/CMakeFiles/rx.dir

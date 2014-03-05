@@ -1,4 +1,7 @@
 #include "msp430.h"
+#include "uart.h"
+
+u16 tick_time=0;
 
 unsigned int dist;
 void bc(void)
@@ -19,34 +22,27 @@ void bc(void)
 void TIM_init(void)
 {
     TA1CTL|=TACLR;
-    TA1CCR0 = 60000 - 1;                         // PWM Period
+    TA1CCR0 = 100 - 1;              // Period
     TA1CTL = TASSEL_1+ID_3+TAIE;    // ACLK, up mode
+    TA1CTL|=MC_1;
+    _EINT();
 }
 
 void IO_init(void)
 {
-    P1DIR&=~(BIT0+BIT1);
-    P1IE|=BIT0+BIT1;
-    P1IES|=BIT0+BIT1;
-    P1IFG&=~(BIT0+BIT1);
+    P1DIR&=~(BIT1);
+    P1IE|=BIT1;
+    P1IES|=BIT1;
+    P1IFG&=~(BIT1);
+    _EINT();
 }
 
 #pragma vector=PORT1_VECTOR
 __interrupt void Port_1(void)
 {
-    unsigned int count;
-    if((P1IFG&BIT0)==BIT0)//if get start signal
-    {
-        TA1CTL&=~MC_1; //stop timer
-        TA1R=0;//clear timer
-        TA1CTL|=MC_1; //start timer
-        P1IE|=BIT1;
-        P1IFG&=~BIT0;
-    }
+    unsigned int count=0;
     if((P1IFG&BIT1)==BIT1)
     {
-        TA1CTL&=~MC_1; //stop timer
-        count=TA1R;
         dist=340*count/1000;
         P1IE&=~BIT1;  //stop catching sound.just want the first sound
         P1IFG&=~BIT1;
@@ -58,10 +54,8 @@ __interrupt void TA1_ISR(void)
 {
     switch(TA1IV)//TA1IV is read clear so it must be read only once.
     {
-    case 0x0a:
-        P1IE&=~BIT1;  //timeout,stop catching sound.
-        TA1CTL&=~MC_1; //stop timer
-        TA1R=0;//clear timer
+    case 0x0a: //overflow
+        tick_time++;
         break;
     default:
         break;
@@ -70,14 +64,37 @@ __interrupt void TA1_ISR(void)
 
 int main (void)
 {
+    u16 *p;
+    u16 timeA1=0,timeB=0,timeA2=0,dt=0;
     WDTCTL = WDTPW + WDTHOLD;
     bc();
     TIM_init();
     IO_init();
-    _EINT();
+    UART_Init();
     while(1)
     {
-        LPM1;
+        if(uart_data.data_ready==1)
+        {
+            if(uart_data.cmd==0x00)
+            {
+                send_data.add=0xffff;
+                send_data.cmd=0x01;//reqest time
+                p=(u16 *)&send_data.data;
+                *p=tick_time;
+                uart_send(&send_data);
+            }
+            if(uart_data.cmd==0x02)
+            {
+                p=(u16 *)(uart_data.data+4);
+                *p=tick_time;
+                timeA1=*(p-2);
+                timeB=*(p-1);
+                timeA2=*p;
+                dt=(timeA2>timeA1)? (timeA2-timeA1):(timeA1-timeA2);
+                dt=dt;
+            }
+            uart_data.data_ready=0;
+        }
     }
     return 0;
 }

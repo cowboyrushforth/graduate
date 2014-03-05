@@ -1,4 +1,4 @@
-# Install script for directory: /home/tofu/Documents/graduate_design/qtcreator/rx
+# Install script for directory: /media/tofu/file_disk/tofu/graduate_design/detail/rx
 
 # Set the install prefix
 IF(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,7 +38,7 @@ ELSE(CMAKE_INSTALL_COMPONENT)
   SET(CMAKE_INSTALL_MANIFEST "install_manifest.txt")
 ENDIF(CMAKE_INSTALL_COMPONENT)
 
-FILE(WRITE "/home/tofu/Documents/graduate_design/qtcreator/rx/rx-build/${CMAKE_INSTALL_MANIFEST}" "")
+FILE(WRITE "/media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build/${CMAKE_INSTALL_MANIFEST}" "")
 FOREACH(file ${CMAKE_INSTALL_MANIFEST_FILES})
-  FILE(APPEND "/home/tofu/Documents/graduate_design/qtcreator/rx/rx-build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
+  FILE(APPEND "/media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build/${CMAKE_INSTALL_MANIFEST}" "${file}\n")
 ENDFOREACH(file)

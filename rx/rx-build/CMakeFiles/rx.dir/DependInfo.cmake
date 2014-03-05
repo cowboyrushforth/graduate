@@ -4,7 +4,8 @@ SET(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 SET(CMAKE_DEPENDS_CHECK_C
-  "/home/tofu/Documents/graduate_design/qtcreator/rx/main.c" "/home/tofu/Documents/graduate_design/qtcreator/rx/rx-build/CMakeFiles/rx.dir/main.c.o"
+  "/media/tofu/file_disk/tofu/graduate_design/detail/rx/main.c" "/media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build/CMakeFiles/rx.dir/main.c.o"
+  "/media/tofu/file_disk/tofu/graduate_design/detail/rx/uart.c" "/media/tofu/file_disk/tofu/graduate_design/detail/rx/rx-build/CMakeFiles/rx.dir/uart.c.o"
   )
 SET(CMAKE_C_COMPILER_ID "GNU")
 

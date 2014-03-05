@@ -1,5 +1,6 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/rx.dir/main.c.o"
+  "CMakeFiles/rx.dir/uart.c.o"
   "rx.pdb"
   "rx"
 )
