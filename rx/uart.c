@@ -30,7 +30,7 @@ int uart_send(struct Send_Data_struct *data)
 {
     u8 *p=(u8 *)data;
     u8 i;
-    for(i=0;i<=8+UART_DATA_LEN;i++)
+    for(i=0;i<9+UART_DATA_LEN;i++)
     {
         while (!(IFG2&UCA0TXIFG));
         UCA0TXBUF=*(p+i);
@@ -50,7 +50,8 @@ struct Received_Data_struct uart_data;
 __interrupt void USCI0RX_ISR(void)
 {
   static u8 index=0;
-  uart_data.data_ready=0;
+  if(uart_data.data_ready!=0)
+      return;
   u8 *receive_data=(u8*)&uart_data;
   *(receive_data+index)=UCA0RXBUF;
   switch(index)

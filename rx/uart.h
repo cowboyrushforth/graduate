@@ -5,6 +5,8 @@
 
 #define UART_DATA_LEN 8
 
+#pragma pack(push)
+#pragma pack(1)
 struct Received_Data_struct
 {
   u8 head[3];
@@ -13,8 +15,6 @@ struct Received_Data_struct
   u8 check;
   u8 data_ready;
 };
-#pragma pack(push)
-#pragma pack(1)
 struct Send_Data_struct
 {
     u8 headaa;

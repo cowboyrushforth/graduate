@@ -62,10 +62,21 @@ __interrupt void TA1_ISR(void)
     }
 }
 
+void send_timer_sync(void)
+{
+    u16 *pOut;
+    send_data.add=0x0100; //low byte is in front or:0x0100
+    send_data.cmd=0x01;//reqest time
+    pOut=(u16 *)&send_data.data;
+    *pOut=tick_time;
+    uart_send(&send_data);
+}
+
 int main (void)
 {
-    u16 *p;
-    u16 timeA1=0,timeB=0,timeA2=0,dt=0;
+    u16 *pIn,*pOut,cnt;
+    u16 t[6];
+    long timeA1=0,timeB=0,timeA2=0,dt=0,sum_of_time;
     WDTCTL = WDTPW + WDTHOLD;
     bc();
     TIM_init();
@@ -77,21 +88,43 @@ int main (void)
         {
             if(uart_data.cmd==0x00)
             {
-                send_data.add=0xffff;
-                send_data.cmd=0x01;//reqest time
-                p=(u16 *)&send_data.data;
-                *p=tick_time;
-                uart_send(&send_data);
+                cnt=0;
+                sum_of_time=0;
+                send_timer_sync();
             }
             if(uart_data.cmd==0x02)
             {
-                p=(u16 *)(uart_data.data+4);
-                *p=tick_time;
-                timeA1=*(p-2);
-                timeB=*(p-1);
-                timeA2=*p;
-                dt=(timeA2>timeA1)? (timeA2-timeA1):(timeA1-timeA2);
-                dt=dt;
+                pIn=(u16 *)(&uart_data.data[0]);
+                timeA2=(tick_time>*pIn)?tick_time:(65536+tick_time);
+                //timeA1=(*pIn);
+                timeA1=uart_data.data[0];
+                timeA1=uart_data.data[1]<<8;
+                timeB=(*(pIn+1)>*pIn)?*(pIn+1):(65536+*(pIn+1));
+                dt=(timeA2-timeA1)/2;//round trip time
+                if(dt<350&&dt>100)
+                {
+                    t[cnt]=timeA1-timeB+dt;
+                    sum_of_time+=t[cnt];
+                    cnt++;
+                    t[cnt]=timeA2-timeB-2*dt;
+                    sum_of_time+=t[cnt];
+                    cnt++;
+                    if(cnt<6)
+                       send_timer_sync();
+                    else  //get enough data to caculate time
+                    {
+                        tick_time=(u16)((sum_of_time/6)+tick_time)%0xffff;
+                        pOut=(u16 *)(&send_data.data[0]);
+                        send_data.add=0x0000; //low byte is in front to host
+                        send_data.cmd=0xf1;//reqest time
+                        *pOut=(sum_of_time/6)%0xffff;
+                        *(pOut+1)=tick_time;
+                        *(pOut+2)=(timeA2%0xffff);
+                        *(pOut+3)=(timeB%0xffff);
+                        uart_send(&send_data);
+                    }
+                }
+
             }
             uart_data.data_ready=0;
         }
