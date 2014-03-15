@@ -75,7 +75,7 @@ void send_timer_sync(void)
 int main (void)
 {
     u16 *pIn,*pOut,cnt;
-    u16 t[6];
+    int t[6];
     long timeA1=0,timeB=0,timeA2=0,dt=0,sum_of_time;
     WDTCTL = WDTPW + WDTHOLD;
     bc();
@@ -106,14 +106,14 @@ int main (void)
                     t[cnt]=timeA1-timeB+dt;
                     sum_of_time+=t[cnt];
                     cnt++;
-                    t[cnt]=timeA2-timeB-2*dt;
+                    t[cnt]=timeA2-timeB-dt;
                     sum_of_time+=t[cnt];
                     cnt++;
                     if(cnt<6)
                        send_timer_sync();
                     else  //get enough data to caculate time
                     {
-                        tick_time=(u16)((sum_of_time/6)+tick_time)%0xffff;
+                        tick_time=(u16)(tick_time-(sum_of_time/6))%0xffff;
                         pOut=(u16 *)(&send_data.data[0]);
                         send_data.add=0x0000; //low byte is in front to host
                         send_data.cmd=0xf1;//reqest time
